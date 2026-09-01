@@ -10,21 +10,10 @@
 import aruco from "js-aruco2/src/aruco.js";
 import type { ImageLike, Point } from "./types.ts";
 
-interface ArucoMarker {
-  id: number;
-  corners: Point[];
-}
+// Types live in src/types/js-aruco2.d.ts — the package ships none of its own.
+const AR = aruco.AR;
 
-interface ArucoDetector {
-  detect(image: ImageLike): ArucoMarker[];
-}
-
-interface ArucoNamespace {
-  Detector: new (options?: { dictionaryName?: string; maxHammingDistance?: number }) => ArucoDetector;
-  Dictionary: new (name: string) => { codeList: string[]; markSize: number };
-}
-
-const AR = (aruco as { AR: ArucoNamespace }).AR;
+type ArucoDetector = InstanceType<typeof AR.Detector>;
 
 /**
  * ARUCO rather than the library default of ARUCO_MIP_36h12.

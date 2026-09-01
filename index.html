@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0e1411">
+  <title>StripLab — calibrated water testing</title>
+  <link rel="stylesheet" href="/src/ui/styles.css">
+</head>
+<body>
+  <main id="app">
+    <!-- Intro -->
+    <section class="screen" data-screen="intro">
+      <div class="intro">
+        <span class="eyebrow">StripLab</span>
+        <h1>A water test you can <em>trust</em> the colour of.</h1>
+        <p class="lede">
+          A test strip costs 40 cents and gives an answer in 60 seconds. But you
+          have to squint at a colour chart under your kitchen light and guess &mdash;
+          and that guess is wrong often enough that nobody trusts it.
+        </p>
+        <p class="lede">
+          Photograph the strip on the reference card. StripLab corrects for
+          whatever your camera and your lighting did, then reads the pads
+          against a calibrated ramp and tells you how much to trust the result.
+        </p>
+
+        <div class="actions">
+          <button class="btn btn-primary" data-action="start-camera">Use camera</button>
+          <label class="btn btn-secondary">
+            Open a photo
+            <input type="file" accept="image/*" hidden data-action="pick-file">
+          </label>
+        </div>
+
+        <p class="fineprint">
+          No reference card yet? Run <code>npm run card</code>, then print
+          <code>out/card.html</code> at 100% scale.
+        </p>
+      </div>
+    </section>
+
+    <!-- Capture -->
+    <section class="screen" data-screen="capture" hidden>
+      <div class="stage">
+        <video data-el="video" playsinline muted></video>
+        <canvas data-el="overlay" class="overlay"></canvas>
+        <div class="hint" data-el="hint">Point at the card</div>
+      </div>
+      <div class="capture-bar">
+        <button class="btn btn-ghost" data-action="back">Cancel</button>
+        <button class="shutter" data-action="shoot" aria-label="Take reading"></button>
+        <span class="capture-status" data-el="markerCount"></span>
+      </div>
+    </section>
+
+    <!-- Result -->
+    <section class="screen" data-screen="result" hidden>
+      <div class="result">
+        <header class="result-head">
+          <span class="eyebrow" data-el="resultEyebrow">Reading</span>
+          <h2 data-el="resultTitle">Results</h2>
+          <p class="result-meta" data-el="resultMeta"></p>
+        </header>
+
+        <div data-el="readings" class="readings"></div>
+
+        <div class="disclaimer">
+          <strong>This is a screening tool, not a laboratory.</strong>
+          It tells you whether to worry and whether to pay for a real test. It
+          does not replace a certified lab panel, and you should not make health
+          decisions on it alone.
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" data-action="again">Test again</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Failure -->
+    <section class="screen" data-screen="failure" hidden>
+      <div class="failure">
+        <div class="failure-mark" aria-hidden="true"></div>
+        <h2 data-el="failureTitle">Could not read that</h2>
+        <p class="failure-message" data-el="failureMessage"></p>
+        <p class="failure-detail" data-el="failureDetail"></p>
+        <div class="actions">
+          <button class="btn btn-primary" data-action="again">Try again</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="/src/ui/main.ts"></script>
+</body>
+</html>
