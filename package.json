@@ -1,0 +1,23 @@
+{
+  "name": "striplab",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Calibrated water quality readings from a $0.40 test strip and a phone camera.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "node --test tests/",
+    "card": "node tools/generate-card.ts"
+  },
+  "dependencies": {
+    "culori": "^4.0.2",
+    "js-aruco2": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5"
+  }
+}
